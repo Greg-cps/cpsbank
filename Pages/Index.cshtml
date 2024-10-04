@@ -1,0 +1,296 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #007bff;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1; /* Makes the card flexible to grow and shrink */
+            max-width: 300px; /* Optional: sets a maximum width for the card */
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+        .feature-card {
+            margin: 10px; /* Add some margin between feature cards */
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            background-color: white; /* Background color for feature cards */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%; /* Full width */
+            position: relative; /* Ensure it sits below the content */
+            left: 0; /* Align to the left */
+        }
+
+        /* Floating Action Button Styles */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .faq-section {
+            margin-top: 40px;
+        }
+
+        .accordion {
+            margin: 15px 0;
+        }
+
+        .accordion-item {
+            margin-bottom: 10px;
+            background-color: white;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .accordion-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .accordion-content {
+            padding: 10px;
+            display: none; /* Hidden by default */
+        }
+
+        .accordion-button.active + .accordion-content {
+            display: block; /* Show content when active */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to CPSBank</h1>
+        <p>Your trusted partner for all your banking needs.</p>
+    </div>
+
+    <!-- Card Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-title">Personal Banking</h5>
+                    <p class="card-text">Manage your personal accounts with ease, offering tailored services for your savings, loans, and daily transactions.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-title">Business Banking</h5>
+                    <p class="card-text">Empower your business with scalable banking solutions. CPSBank offers services from small businesses to large enterprises.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5 class="card-title">Investment Solutions</h5>
+                    <p class="card-text">Plan for your future with our trusted investment options and personalized financial guidance to grow your wealth.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Why Choose CPSBank?</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <h5>Secure Banking</h5>
+                    <p>Enjoy secure online and mobile banking with top-notch encryption.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <h5>24/7 Customer Support</h5>
+                    <p>Our customer service team is available around the clock to assist you.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <h5>Competitive Rates</h5>
+                    <p>We offer competitive interest rates to help you maximize your savings.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <h5>Personalized Advice</h5>
+                    <p>Receive custom financial advice from our highly skilled expert advisors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="container faq-section">
+        <h2 class="text-center">Frequently Asked Questions</h2>
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-button">What services does CPSBank offer?</button>
+                <div class="accordion-content">
+                    <p>CPSBank offers a variety of services including personal banking, business banking, and investment solutions tailored to meet your needs.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">How can I contact customer support?</button>
+                <div class="accordion-content">
+                    <p>You can contact our customer support team via phone or by visiting any of our branches. We're here to help!</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">Is online banking safe?</button>
+                <div class="accordion-content">
+                    <p>Yes, we use top-notch encryption and security measures to ensure that your online banking experience is safe and secure.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">What are the account types available?</button>
+                <div class="accordion-content">
+                    <p>We offer various account types, including savings accounts, current accounts, and fixed deposit accounts to suit your financial goals.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">How do I open an account?</button>
+                <div class="accordion-content">
+                    <p>You can open an account online through our website or visit any of our branches with the required documents.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">Are there any fees associated with accounts?</button>
+                <div class="accordion-content">
+                    <p>Yes, some accounts may have maintenance fees. Please check our fee schedule or contact customer support for details.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-button">What should I do if I forget my password?</button>
+                <div class="accordion-content">
+                    <p>You can reset your password using the "Forgot Password" option on our login page or contact customer support for assistance.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Get in Touch</h2>
+        <p class="text-center">Have questions? We're here to help!</p>
+        <div class="text-center">
+            <a href="#" class="btn">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="fab" onclick="scrollToTop()">↑</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <h5>CPSBank</h5>
+            <p>123 Banking St, Nairobi, Kenya</p>
+            <p>Email: support@cpsbank.com | Phone: +254 700 123 456</p>
+            <p>&copy; 2024 CPSBank. All rights reserved.</p>
+            <p>Follow us on:</p>
+            <p>
+                <a href="#" style="color: white; text-decoration: none;">Facebook</a> |
+                <a href="#" style="color: white; text-decoration: none;">Twitter</a> |
+                <a href="#" style="color: white; text-decoration: none;">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('active');
+                const content = button.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Scroll to top functionality
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

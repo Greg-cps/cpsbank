@@ -1,0 +1,59 @@
+﻿@page
+@model cpsbank.Pages.Clients.CreateModel
+
+<h2>Create New Client</h2>
+
+<form method="post">
+    <div class="row mb-3">
+        <label class="col-sm-3"col-form-label">Fist Name</label>
+        <div class="col-sm-6">
+            <input type ="text" class="form-control" name="FirstName" value="" />
+
+         </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3" col-form-label">Last Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="LastName" value="" />
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3" col-form-label">Email</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="Email" value="" />
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3" col-form-label">PhoneNumber</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="PhoneNumber" value="" />
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3" col-form-label">DateOfBirth </label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="DateOfBirth " value="" />
+
+         </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3" col-form-label">AccountBalance </label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="AccountBalance " value="" />
+
+        </div>
+    </div>
+    
+        <button type="submit" class="btn btn-primary">Create Client</button>
+        <a class="btn btn-secondary" href="/Clients/Index">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
