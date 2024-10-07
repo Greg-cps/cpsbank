@@ -5,9 +5,9 @@
 <h2>List Of Clients</h2>
 
 <!-- Button to create a new client -->
-<a class="btn btn-primary btn-sm" href="/Clients/new">Create New Client</a>
-<br/>
-<br/>
+<a class="btn btn-primary btn-sm" asp-page="/Clients/New">Create New Client</a>
+<br />
+<br />
 
 <!-- Search Form -->
 <form method="get" class="mb-3">
@@ -41,9 +41,9 @@
                 <td>@client.PhoneNumber</td>
                 <td>@client.AccountBalance.ToString("C")</td>
                 <td>
-                    <!-- Links to edit or delete the client -->
-                    <a class="btn btn-success btn-sm" href="/Clients/Edit?id=@client.ClientID">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Clients/Delete?id=@client.ClientID">Delete</a>
+                    <!-- Updated Edit and Delete buttons to use Razor's routing -->
+                    <a class="btn btn-success btn-sm" asp-page="/Clients/edit" asp-route-id="@client.ClientID">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-page="/Clients/Delete" asp-route-id="@client.ClientID">Delete</a>
                 </td>
             </tr>
         }

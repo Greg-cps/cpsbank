@@ -35,16 +35,39 @@ namespace cpsbank.Pages.Clients
             ClientInfo.DateOfBirth = DateTime.TryParse(Request.Form["DateOfBirth"], out DateTime dob) ? dob : (DateTime?)null;
             ClientInfo.AccountBalance = decimal.TryParse(Request.Form["AccountBalance"], out decimal balance) ? balance : 0;
 
+            // Validate minimum age of 18 years
+            if (ClientInfo.DateOfBirth != null)
+            {
+                int age = DateTime.Now.Year - ClientInfo.DateOfBirth.Value.Year;
+                if (ClientInfo.DateOfBirth.Value > DateTime.Now.AddYears(-age)) age--;
+
+                if (age < 18)
+                {
+                    ModelState.AddModelError(string.Empty, "Client must be at least 18 years old.");
+                    return Page();
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Date of birth is required.");
+                return Page();
+            }
+
+            // Validate that account balance is positive
+            if (ClientInfo.AccountBalance <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Account balance must be a positive number.");
+                return Page();
+            }
+
             // Validate required fields
             if (string.IsNullOrWhiteSpace(ClientInfo.FirstName) ||
                 string.IsNullOrWhiteSpace(ClientInfo.LastName) ||
                 string.IsNullOrWhiteSpace(ClientInfo.Email) ||
                 string.IsNullOrWhiteSpace(ClientInfo.PhoneNumber) ||
-                string.IsNullOrWhiteSpace(ClientInfo.AccountNumber) ||
-                ClientInfo.DateOfBirth == null ||
-                ClientInfo.AccountBalance < 0)
+                string.IsNullOrWhiteSpace(ClientInfo.AccountNumber))
             {
-                ModelState.AddModelError(string.Empty, "All fields are required, and account balance cannot be negative.");
+                ModelState.AddModelError(string.Empty, "All fields are required.");
                 return Page();
             }
 
@@ -55,16 +78,33 @@ namespace cpsbank.Pages.Clients
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "INSERT INTO Clients (FirstName, LastName, Email, PhoneNumber, AccountNumber, DateOfBirth, AccountBalance) " +
-                                 "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AccountNumber, @DateOfBirth, @AccountBalance)";
 
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    // Check for duplicate email or phone number
+                    string checkDuplicateSql = "SELECT COUNT(*) FROM Clients WHERE Email = @Email OR PhoneNumber = @PhoneNumber";
+                    using (SqlCommand checkCmd = new SqlCommand(checkDuplicateSql, connection))
+                    {
+                        checkCmd.Parameters.AddWithValue("@Email", ClientInfo.Email);
+                        checkCmd.Parameters.AddWithValue("@PhoneNumber", ClientInfo.PhoneNumber);
+
+                        int existingCount = (int)checkCmd.ExecuteScalar();
+                        if (existingCount > 0)
+                        {
+                            ModelState.AddModelError(string.Empty, "A client with the same email or phone number already exists.");
+                            return Page();
+                        }
+                    }
+
+                    // Insert new client record
+                    string insertSql = "INSERT INTO Clients (FirstName, LastName, Email, PhoneNumber, AccountNumber, DateOfBirth, AccountBalance) " +
+                                       "VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AccountNumber, @DateOfBirth, @AccountBalance)";
+                    using (SqlCommand command = new SqlCommand(insertSql, connection))
                     {
                         command.Parameters.AddWithValue("@FirstName", ClientInfo.FirstName);
                         command.Parameters.AddWithValue("@LastName", ClientInfo.LastName);
                         command.Parameters.AddWithValue("@Email", ClientInfo.Email);
                         command.Parameters.AddWithValue("@PhoneNumber", ClientInfo.PhoneNumber);
                         command.Parameters.AddWithValue("@AccountNumber", ClientInfo.AccountNumber);
+                        command.Parameters.AddWithValue("@DateOfBirth", ClientInfo.DateOfBirth);
                         command.Parameters.AddWithValue("@AccountBalance", ClientInfo.AccountBalance);
 
                         command.ExecuteNonQuery();

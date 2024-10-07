@@ -1,24 +1,17 @@
-﻿@page
-@model cpsbank.Pages.Clients.NewModel
+﻿@page "{id:int?}"
+@model cpsbank.Pages.Clients.EditModel
 @{
-    ViewData["Title"] = "Create New Client";
+    ViewData["Title"] = "Edit Client";
 }
 
-<h2>Create New Client</h2>
+<h2>Edit Client</h2>
 
-<!-- Display Error Messages -->
-@if (Model.ErrorMessage != null && Model.ErrorMessage.Length > 0)
+<div class="alert alert-danger" role="alert" asp-validation-summary="All"></div>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
 {
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger">
         @Model.ErrorMessage
-    </div>
-}
-
-<!-- Display Success Message -->
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
     </div>
 }
 
@@ -51,7 +44,5 @@
         <label for="AccountBalance">Account Balance</label>
         <input type="number" name="AccountBalance" class="form-control" value="@Model.ClientInfo.AccountBalance" step="0.01" required />
     </div>
-    <br/>
-    
-    <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp; <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
