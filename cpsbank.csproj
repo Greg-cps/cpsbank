@@ -38,11 +38,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Clients\Delete.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\Clients\edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Pages\Clients\edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Clients\Delete.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,48 +1,35 @@
-﻿@page "{id:int?}"
+﻿@page
 @model cpsbank.Pages.Clients.EditModel
-@{
-    ViewData["Title"] = "Edit Client";
-}
 
 <h2>Edit Client</h2>
 
-<div class="alert alert-danger" role="alert" asp-validation-summary="All"></div>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Client.FirstName"></label>
+        <input asp-for="Client.FirstName" class="form-control" />
+        <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Client.LastName"></label>
+        <input asp-for="Client.LastName" class="form-control" />
+        <span asp-validation-for="Client.LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Client.Email"></label>
+        <input asp-for="Client.Email" class="form-control" />
+        <span asp-validation-for="Client.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Client.PhoneNumber"></label>
+        <input asp-for="Client.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Client.DateOfBirth"></label>
+        <input asp-for="Client.DateOfBirth" class="form-control" type="date" />
+        <span asp-validation-for="Client.DateOfBirth" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Client.AccountNumber"></label>
+        <input asp-for="Client.AccountNumber" class="form-control" />
 
-@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
-{
-    <div class="alert alert-danger">
-        @Model.ErrorMessage
-    </div>
-}
-
-<form method="post" class="mt-4">
-    <div class="form-group">
-        <label for="FirstName">First Name</label>
-        <input type="text" name="FirstName" class="form-control" value="@Model.ClientInfo.FirstName" required />
-    </div>
-    <div class="form-group">
-        <label for="LastName">Last Name</label>
-        <input type="text" name="LastName" class="form-control" value="@Model.ClientInfo.LastName" required />
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input type="email" name="Email" class="form-control" value="@Model.ClientInfo.Email" required />
-    </div>
-    <div class="form-group">
-        <label for="PhoneNumber">Phone Number</label>
-        <input type="tel" name="PhoneNumber" class="form-control" value="@Model.ClientInfo.PhoneNumber" required />
-    </div>
-    <div class="form-group">
-        <label for="AccountNumber">Account Number</label>
-        <input type="text" name="AccountNumber" class="form-control" value="@Model.ClientInfo.AccountNumber" required />
-    </div>
-    <div class="form-group">
-        <label for="DateOfBirth">Date of Birth</label>
-        <input type="date" name="DateOfBirth" class="form-control" value="@Model.ClientInfo.DateOfBirth?.ToString("yyyy-MM-dd")" required />
-    </div>
-    <div class="form-group">
-        <label for="AccountBalance">Account Balance</label>
-        <input type="number" name="AccountBalance" class="form-control" value="@Model.ClientInfo.AccountBalance" step="0.01" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Update</button>
-</form>
